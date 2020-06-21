@@ -39,15 +39,7 @@ to predict if a patient died in the next 48 hours following a myocardial
 infarction.
 
 ``` r
-library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
+library(dplyr, warn.conflicts = FALSE)
 library(yardstick)
 #> For binary classification, the first factor level is assumed to be the event.
 #> Set the global option `yardstick.event_first` to `FALSE` to change this.
@@ -84,8 +76,8 @@ Lets calculate AUC.
 predictions <- heart %>%
   select(death) %>%
   mutate(death = factor(death, levels = c("1", "0")),
-         logitProb = predict(object = glmLogit, nnewdata = heart, type = "response"),
-         loglogProb = predict(object = glmLoglog, nnewdata = heart, type = "response"))
+         logitProb = predict(object = glmLogit, newdata = heart, type = "response"),
+         loglogProb = predict(object = glmLoglog, newdata = heart, type = "response"))
 
 roc_auc(data = predictions, truth = death, logitProb)
 #> # A tibble: 1 x 3
