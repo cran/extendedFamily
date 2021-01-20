@@ -2,12 +2,14 @@
 % Please edit documentation in R/binomialEF.R
 \name{binomialEF}
 \alias{binomialEF}
-\title{Additional Binomial Links for glm Models}
+\title{Additional Binomial Links For Generalized Linear Models}
 \usage{
-binomialEF(link = "loglog")
+binomialEF(link = "loglog", alpha = 1)
 }
 \arguments{
-\item{link}{name of link function. One of loglog, logc, or identity (Default: loglog)}
+\item{link}{name of link function. One of loglog, logc, identity, or  odds-power (Default: loglog)}
+
+\item{alpha}{power for odds-power link. Not used otherwise. (Default: 1)}
 }
 \value{
 An object of class "family" (which has a concise print method). This is a list with elements
@@ -43,10 +45,14 @@ An object of class "family" (which has a concise print method). This is a list w
         }
 }
 \description{
-Additional Binomial Links for glm Models
+Additional Binomial Links For Generalized Linear Models
 }
 \details{
 family is a generic function with methods for classes "glm" and "lm".
+
+The loglog link works well for many datasets. The range of the link is negative
+infinity to positive infinity. For all other links, this is not true. This can cause a failure to converge in R's
+glm function. If this happens, the link does not work well for the training data. Try another link.
 }
 \examples{
 library(stats)

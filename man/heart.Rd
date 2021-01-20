@@ -4,7 +4,8 @@
 \name{heart}
 \alias{heart}
 \title{Heart Attack Data}
-\format{A data frame with 4,483 rows and 11 variables:
+\format{
+A data frame with 4,483 rows and 11 variables:
 \describe{
   \item{death}{1 - Death within 48 hours of myocardial infarction onset. 0 - otherwise.}
   \item{anterior}{1 - anterior infarction. 0 - inferior infarction}
@@ -17,7 +18,8 @@
   \item{age2}{1 - Patient age between 60 and 69 inclusive. 0 - otherwise}
   \item{age3}{1 - Patient age between 70 and 79 inclusive. 0 - otherwise}
   \item{age4}{1 - Patient age 80 or higher. 0 - otherwise}
-}}
+}
+}
 \source{
 Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
 

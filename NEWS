@@ -1,5 +1,10 @@
+# extendedFamily v0.2.0
+     Adding odds-power link.
+     Moving from travisCI to github actions.
+     Adding tests for derivative of inverse link and valideta functions.
+
 # extendedFamily v0.1.1
-     Fixing typo in readme
+     Fixing typo in readme.
 
 # extendedFamily v0.1.0
-     Initial release
+     Initial release.
