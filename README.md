@@ -14,55 +14,32 @@ coverage](https://codecov.io/gh/gmcmacran/extendedFamily/branch/master/graph/bad
 <!-- badges: end -->
 
 extendedFamily adds new links to R’s generalized linear models. These
-families are drop in additions to the existing families.
+families are drop in additions to existing families.
 
 ## Logit vs Loglog: Mathematical Comparison
 
-The generalized linear model is
+For the binomial family, the link is usually the logit but there are
+other options. The loglog model assigns a lower probability for X
+ranging from -5 to 2. For X over 2, the models are essentially
+indistinguishable. This can lead to improved performance when the
+response rate is much lower than 50%.
 
-  
-![ g(Y) = B\_0 + B\_1X\_1
-](https://latex.codecogs.com/png.latex?%20g%28Y%29%20%3D%20B_0%20%2B%20B_1X_1%20
-" g(Y) = B_0 + B_1X_1 ")  
-
-with g being a link function. For the binomial family, the link is
-usually the logit which makes the model
-
-  
-![ ln(\\frac{P(Y = 1)}{1 - P(Y = 1)}) = B\_0 + B\_1X\_1
-](https://latex.codecogs.com/png.latex?%20ln%28%5Cfrac%7BP%28Y%20%3D%201%29%7D%7B1%20-%20P%28Y%20%3D%201%29%7D%29%20%3D%20B_0%20%2B%20B_1X_1%20
-" ln(\\frac{P(Y = 1)}{1 - P(Y = 1)}) = B_0 + B_1X_1 ")  
-
-Using the loglog link, the model is
-
-  
-![ -ln(-ln(P(Y = 1))) = B\_0 + B\_1X\_1
-](https://latex.codecogs.com/png.latex?%20-ln%28-ln%28P%28Y%20%3D%201%29%29%29%20%3D%20B_0%20%2B%20B_1X_1%20
-" -ln(-ln(P(Y = 1))) = B_0 + B_1X_1 ")  
-
-The loglog model assigns a lower probability for X ranging from -5 to 2.
-The biggest differences are around -1. For X over 2, the models are
-essentially indistinguishable.
 <img src="man/figures/README-graphExample-1.png" width="100%" />
 
 ## Logit vs Loglog: Model Performance on Real World Data
 
 The heart data contains info on 4,483 heart attack victims. The goal is
 to predict if a patient died in the next 48 hours following a myocardial
-infarction. The low frequency of deaths suggests the loglog link is
-probably a better than the logit link.
+infarction. The low death rate makes this data set a good candidate for
+the loglog link.
 
 ``` r
 data(heart)
 
 heart %>%
-  group_by(death) %>%
-  summarise(Count = n())
-#> # A tibble: 2 x 2
-#>   death Count
-#>   <dbl> <int>
-#> 1     0  4307
-#> 2     1   176
+  summarise(deathRate = mean(death))
+#>    deathRate
+#> 1 0.03925942
 ```
 
 Only the family object needs to change to use the loglog link.
@@ -74,7 +51,7 @@ glmLoglog <- glm(formula = death ~ anterior + hcabg + kk2 + kk3 + kk4 + age2 + a
                  data = heart, family = binomialEF(link = "loglog"))
 ```
 
-Given the same data, AUC is slightly higher for the loglog link.
+AUC improved by changing the link.
 
 ``` r
 predictions <- heart %>%
