@@ -96,7 +96,7 @@ binomIdent <- binomialEF(link = "identity")
 gaussIdent <- gaussian(link = "identity")
 
 test_that("Has all the correct elements", {
-  expect_true(all(names(binomIdent) == c(names(gaussIdent), "simulate")))
+  expect_true(setequal(names(binomIdent), c(names(gaussIdent), "simulate")))
   expect_true(all(class(binomIdent) == class(gaussIdent)))
 })
 
@@ -132,7 +132,7 @@ binomOP <- binomialEF(link = "odds-power", alpha = 5)
 gaussIdent <- gaussian(link = "identity")
 
 test_that("Has all the correct elements", {
-  expect_true(all(names(binomOP) == c(names(gaussIdent), "simulate")))
+  expect_true(setequal(names(binomOP), c(names(gaussIdent), "simulate")))
   expect_true(all(class(binomOP) == class(gaussIdent)))
 })
 
@@ -141,7 +141,7 @@ test_that("Use link(inverse_link(X)) = X to check link)", {
   expect_true(isTRUE(all.equal(binomOP$linkfun(binomOP$linkinv(seq(0, .99, .01))), seq(0, .99, .01))))
 })
 
-# Testing over subset of valie range. Getting very close to numerical underflow.
+# Testing over subset of valid range. Getting very close to numerical underflow.
 test_that("Use numerical methods to check derivative of inverse link.", {
   expect_true(isTRUE(all.equal(binomOP$mu.eta(seq(-.18, 10, .01)), numDeriv::grad(binomOP$linkinv, seq(-.18, 10, .01)))))
 })
@@ -159,7 +159,7 @@ binomOP <- binomialEF(link = "odds-power", alpha = 4)
 gaussIdent <- gaussian(link = "identity")
 
 test_that("Has all the correct elements", {
-  expect_true(all(names(binomOP) == c(names(gaussIdent), "simulate")))
+  expect_true(setequal(names(binomOP), c(names(gaussIdent), "simulate")))
   expect_true(all(class(binomOP) == class(gaussIdent)))
 })
 
@@ -168,7 +168,7 @@ test_that("Use link(inverse_link(X)) = X to check link)", {
   expect_true(isTRUE(all.equal(binomOP$linkfun(binomOP$linkinv(seq(0, .99, .01))), seq(0, .99, .01))))
 })
 
-# Testing over subset of valie range. Getting very close to numerical underflow.
+# Testing over subset of valid range. Getting very close to numerical underflow.
 test_that("Use numerical methods to check derivative of inverse link.", {
   expect_true(isTRUE(all.equal(binomOP$mu.eta(seq(.01, 10, .01)), numDeriv::grad(binomOP$linkinv, seq(.01, 10, .01)))))
   expect_true(isTRUE(all.equal(binomOP$mu.eta(seq(-.24, -.01, .01)), numDeriv::grad(binomOP$linkinv, seq(-.24, -.01, .01)))))
@@ -188,7 +188,7 @@ binomOP <- binomialEF(link = "odds-power", alpha = 3)
 gaussIdent <- gaussian(link = "identity")
 
 test_that("Has all the correct elements", {
-  expect_true(all(names(binomOP) == c(names(gaussIdent), "simulate")))
+  expect_true(setequal(names(binomOP), c(names(gaussIdent), "simulate")))
   expect_true(all(class(binomOP) == class(gaussIdent)))
 })
 
@@ -214,7 +214,7 @@ binomOP <- binomialEF(link = "odds-power", alpha = 2)
 gaussIdent <- gaussian(link = "identity")
 
 test_that("Has all the correct elements", {
-  expect_true(all(names(binomOP) == c(names(gaussIdent), "simulate")))
+  expect_true(setequal(names(binomOP), c(names(gaussIdent), "simulate")))
   expect_true(all(class(binomOP) == class(gaussIdent)))
 })
 
@@ -247,7 +247,7 @@ binomOP <- binomialEF(link = "odds-power", alpha = 1)
 gaussIdent <- gaussian(link = "identity")
 
 test_that("Has all the correct elements", {
-  expect_true(all(names(binomOP) == c(names(gaussIdent), "simulate")))
+  expect_true(setequal(names(binomOP), c(names(gaussIdent), "simulate")))
   expect_true(all(class(binomOP) == class(gaussIdent)))
 })
 
@@ -275,12 +275,12 @@ rm(binomOP, gaussIdent)
 # Input checking
 ################
 test_that("Confirm input checking works", {
-  expect_error(binomialEF(link = c("loglog", "loglog")))
-  expect_error(binomialEF(link = 1234))
-  expect_error(binomialEF(link = c("cloglog")))
+  expect_error(binomialEF(link = c("loglog", "loglog")), "Argument link should have length 1.")
+  expect_error(binomialEF(link = 1234), "Argument link should be a character.")
+  expect_error(binomialEF(link = c("cloglog")), "Argument link should be 'loglog', 'logc', 'identity', or 'odds-power'.")
 
-  expect_error(binomialEF(link = "odds-power", alpha = 1.1))
-  expect_error(binomialEF(link = "odds-power", alpha = 0))
-  expect_error(binomialEF(link = "odds-power", alpha = c(-1, 1)))
-  expect_error(binomialEF(link = "odds-power", alpha = "1"))
+  expect_error(binomialEF(link = "odds-power", alpha = c(-1, 1)), "Argument alpha should have length 1.")
+  expect_error(binomialEF(link = "odds-power", alpha = "1"), "Argument alpha should be numeric.")
+  expect_error(binomialEF(link = "odds-power", alpha = 1.1), "Argument alpha should be a whole number.")
+  expect_error(binomialEF(link = "odds-power", alpha = 0), "Argument alpha should be positive.")
 })

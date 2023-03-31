@@ -39,6 +39,8 @@
 #'         \href{https://stat.ethz.ch/R-manual/R-devel/library/stats/html/simulate.html}{simulate}.
 #'         It will normally return a matrix with nsim columns and one row for each fitted value,
 #'         but it can also return a list of length nsim. Clearly this will be missing for ‘quasi-’ families.
+#'   \item dispersion: (optional for R >= 4.3.0) numeric: value of the dispersion parameter,
+#'         if fixed, or NA_real_ if free.
 #'         }
 #'
 #'
@@ -60,10 +62,13 @@ binomialEF <- function(link = "loglog", alpha = 1) {
 
   assertthat::assert_that(length(link) == 1, msg = "Argument link should have length 1.")
   assertthat::assert_that(is.character(link), msg = "Argument link should be a character.")
-  assertthat::assert_that(link %in% c("loglog", "logc", "identity", "odds-power"), msg = "Argument link should be 'loglog', 'logc', 'identity', or 'odds-power'.")
+  assertthat::assert_that(link %in% c("loglog", "logc", "identity", "odds-power"),
+    msg = "Argument link should be 'loglog', 'logc', 'identity', or 'odds-power'."
+  )
 
   if (link == "odds-power") {
     assertthat::assert_that(length(alpha) == 1, msg = "Argument alpha should have length 1.")
+    assertthat::assert_that(is.numeric(alpha), msg = "Argument alpha should be numeric.")
     assertthat::assert_that(alpha %% 1 == 0, msg = "Argument alpha should be a whole number.")
     assertthat::assert_that(alpha > 0L, msg = "Argument alpha should be positive.")
   }
@@ -140,8 +145,9 @@ binomialEF <- function(link = "loglog", alpha = 1) {
   aic <- copyMe$aic
   initialize <- copyMe$initialize
   simfun <- copyMe$simfun
+  dispersion <- copyMe$dispersion
 
-  structure(list(
+  out <- structure(list(
     family = "binomial",
     link = linktemp,
     linkfun = linkfun,
@@ -157,4 +163,11 @@ binomialEF <- function(link = "loglog", alpha = 1) {
   ),
   class = "family"
   )
+
+  if (!is.null(dispersion)) {
+    # R >= 4.3.0
+    out$dispersion <- dispersion
+  }
+
+  return(out)
 }

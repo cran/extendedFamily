@@ -2,7 +2,6 @@ extendedFamily
 ================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
 <!-- badges: start -->
 
 [![CRAN
@@ -10,13 +9,20 @@ status](https://www.r-pkg.org/badges/version/extendedFamily)](https://cran.r-pro
 [![R build
 status](https://github.com/gmcmacran/extendedFamily/workflows/R-CMD-check/badge.svg)](https://github.com/gmcmacran/extendedFamily/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/gmcmacran/extendedFamily/branch/master/graph/badge.svg)](https://codecov.io/gh/gmcmacran/extendedFamily?branch=master)
+coverage](https://codecov.io/gh/gmcmacran/extendedFamily/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gmcmacran/extendedFamily?branch=main)
 <!-- badges: end -->
 
 extendedFamily adds new links to R’s generalized linear models. These
 families are drop in additions to existing families.
 
-## Logit vs Loglog: Mathematical Comparison
+Links:
+
+- loglog
+- logc
+- identity
+- odds-power
+
+## Logit and Loglog: Mathematical Comparison
 
 For the binomial family, the link is usually the logit but there are
 other options. The loglog model assigns a lower probability for X
@@ -26,7 +32,7 @@ response rate is much lower than 50%.
 
 <img src="man/figures/README-graphExample-1.png" width="100%" />
 
-## Logit vs Loglog: Model Performance on Real World Data
+## Logit and Loglog: Model Performance on Real World Data
 
 The heart data contains info on 4,483 heart attack victims. The goal is
 to predict if a patient died in the next 48 hours following a myocardial
@@ -61,13 +67,13 @@ predictions <- heart %>%
          loglogProb = predict(object = glmLoglog, newdata = heart, type = "response"))
 
 roc_auc(data = predictions, truth = death, logitProb)
-#> # A tibble: 1 x 3
+#> # A tibble: 1 × 3
 #>   .metric .estimator .estimate
 #>   <chr>   <chr>          <dbl>
 #> 1 roc_auc binary         0.797
 
 roc_auc(data = predictions, truth = death, loglogProb)
-#> # A tibble: 1 x 3
+#> # A tibble: 1 × 3
 #>   .metric .estimator .estimate
 #>   <chr>   <chr>          <dbl>
 #> 1 roc_auc binary         0.801

@@ -42,6 +42,8 @@ An object of class "family" (which has a concise print method). This is a list w
         \href{https://stat.ethz.ch/R-manual/R-devel/library/stats/html/simulate.html}{simulate}.
         It will normally return a matrix with nsim columns and one row for each fitted value,
         but it can also return a list of length nsim. Clearly this will be missing for ‘quasi-’ families.
+  \item dispersion: (optional for R >= 4.3.0) numeric: value of the dispersion parameter,
+        if fixed, or NA_real_ if free.
         }
 }
 \description{
