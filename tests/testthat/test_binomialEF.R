@@ -143,7 +143,10 @@ test_that("Use link(inverse_link(X)) = X to check link)", {
 
 # Testing over subset of valid range. Getting very close to numerical underflow.
 test_that("Use numerical methods to check derivative of inverse link.", {
-  expect_true(isTRUE(all.equal(binomOP$mu.eta(seq(-.18, 10, .01)), numDeriv::grad(binomOP$linkinv, seq(-.18, 10, .01)))))
+  expect_true(isTRUE(all.equal(
+    binomOP$mu.eta(seq(-.18, 10, .01)),
+    numDeriv::grad(binomOP$linkinv, seq(-.18, 10, .01))
+  )))
 })
 
 test_that("Confirm valideta works as expected", {
@@ -171,7 +174,10 @@ test_that("Use link(inverse_link(X)) = X to check link)", {
 # Testing over subset of valid range. Getting very close to numerical underflow.
 test_that("Use numerical methods to check derivative of inverse link.", {
   expect_true(isTRUE(all.equal(binomOP$mu.eta(seq(.01, 10, .01)), numDeriv::grad(binomOP$linkinv, seq(.01, 10, .01)))))
-  expect_true(isTRUE(all.equal(binomOP$mu.eta(seq(-.24, -.01, .01)), numDeriv::grad(binomOP$linkinv, seq(-.24, -.01, .01)))))
+  expect_true(isTRUE(all.equal(
+    binomOP$mu.eta(seq(-.24, -.01, .01)),
+    numDeriv::grad(binomOP$linkinv, seq(-.24, -.01, .01))
+  )))
 })
 
 test_that("Confirm valideta works as expected", {
@@ -198,7 +204,10 @@ test_that("Use link(inverse_link(X)) = X to check link)", {
 })
 
 test_that("Use numerical methods to check derivative of inverse link.", {
-  expect_true(isTRUE(all.equal(binomOP$mu.eta(seq(-.33, 10, .01)), numDeriv::grad(binomOP$linkinv, seq(-.33, 10, .01)))))
+  expect_true(isTRUE(all.equal(
+    binomOP$mu.eta(seq(-.33, 10, .01)),
+    numDeriv::grad(binomOP$linkinv, seq(-.33, 10, .01))
+  )))
 })
 
 test_that("Confirm valideta works as expected", {
@@ -230,7 +239,10 @@ test_that("Use numerical methods to check derivative of inverse link.", {
 # Testing over subset of valie range. Getting very close to numerical underflow.
 test_that("Use numerical methods to check derivative of inverse link.", {
   expect_true(isTRUE(all.equal(binomOP$mu.eta(seq(.01, 10, .01)), numDeriv::grad(binomOP$linkinv, seq(.01, 10, .01)))))
-  expect_true(isTRUE(all.equal(binomOP$mu.eta(seq(-.49, -.01, .01)), numDeriv::grad(binomOP$linkinv, seq(-.49, -.01, .01)))))
+  expect_true(isTRUE(all.equal(
+    binomOP$mu.eta(seq(-.49, -.01, .01)),
+    numDeriv::grad(binomOP$linkinv, seq(-.49, -.01, .01))
+  )))
 })
 
 test_that("Confirm valideta works as expected", {
@@ -260,7 +272,10 @@ test_that("Use link(inverse_link(X)) = X to check link)", {
 # Differencing method is .999 and Richardson is .5
 # Testing a subset of range
 test_that("Use numerical methods to check derivative of inverse link.", {
-  expect_true(isTRUE(all.equal(binomOP$mu.eta(seq(-.05, 10, .01)), numDeriv::grad(binomOP$linkinv, seq(-.05, 10, .01)))))
+  expect_true(isTRUE(all.equal(
+    binomOP$mu.eta(seq(-.05, 10, .01)),
+    numDeriv::grad(binomOP$linkinv, seq(-.05, 10, .01))
+  )))
 })
 
 test_that("Confirm valideta works as expected", {
@@ -277,7 +292,10 @@ rm(binomOP, gaussIdent)
 test_that("Confirm input checking works", {
   expect_error(binomialEF(link = c("loglog", "loglog")), "Argument link should have length 1.")
   expect_error(binomialEF(link = 1234), "Argument link should be a character.")
-  expect_error(binomialEF(link = c("cloglog")), "Argument link should be 'loglog', 'logc', 'identity', or 'odds-power'.")
+  expect_error(
+    binomialEF(link = c("cloglog")),
+    "Argument link should be 'loglog', 'logc', 'identity', or 'odds-power'."
+  )
 
   expect_error(binomialEF(link = "odds-power", alpha = c(-1, 1)), "Argument alpha should have length 1.")
   expect_error(binomialEF(link = "odds-power", alpha = "1"), "Argument alpha should be numeric.")

@@ -147,21 +147,22 @@ binomialEF <- function(link = "loglog", alpha = 1) {
   simfun <- copyMe$simfun
   dispersion <- copyMe$dispersion
 
-  out <- structure(list(
-    family = "binomial",
-    link = linktemp,
-    linkfun = linkfun,
-    linkinv = linkinv,
-    variance = variance,
-    dev.resids = dev.resids,
-    aic = aic,
-    mu.eta = mu.eta,
-    initialize = initialize,
-    validmu = validmu,
-    valideta = valideta,
-    simulate = simfun
-  ),
-  class = "family"
+  out <- structure(
+    list(
+      family = "binomial",
+      link = linktemp,
+      linkfun = linkfun,
+      linkinv = linkinv,
+      variance = variance,
+      dev.resids = dev.resids,
+      aic = aic,
+      mu.eta = mu.eta,
+      initialize = initialize,
+      validmu = validmu,
+      valideta = valideta,
+      simulate = simfun
+    ),
+    class = "family"
   )
 
   if (!is.null(dispersion)) {

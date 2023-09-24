@@ -4,12 +4,11 @@ extendedFamily
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/extendedFamily)](https://cran.r-project.org/package=extendedFamily)
-[![R build
-status](https://github.com/gmcmacran/extendedFamily/workflows/R-CMD-check/badge.svg)](https://github.com/gmcmacran/extendedFamily/actions)
+[![R-CMD-check](https://github.com/gmcmacran/extendedFamily/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gmcmacran/extendedFamily/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/gmcmacran/extendedFamily/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gmcmacran/extendedFamily?branch=main)
+[![R build
+status](https://github.com/gmcmacran/extendedFamily/workflows/R-CMD-check/badge.svg)](https://github.com/gmcmacran/extendedFamily/actions)
 <!-- badges: end -->
 
 extendedFamily adds new links to R’s generalized linear models. These
@@ -51,10 +50,14 @@ heart %>%
 Only the family object needs to change to use the loglog link.
 
 ``` r
-glmLogit <- glm(formula = death ~ anterior + hcabg + kk2 + kk3 + kk4 + age2 + age3 + age4, 
-                data = heart, family = binomial(link = "logit"))
-glmLoglog <- glm(formula = death ~ anterior + hcabg + kk2 + kk3 + kk4 + age2 + age3 + age4, 
-                 data = heart, family = binomialEF(link = "loglog"))
+glmLogit <- glm(
+  formula = death ~ anterior + hcabg + kk2 + kk3 + kk4 + age2 + age3 + age4,
+  data = heart, family = binomial(link = "logit")
+)
+glmLoglog <- glm(
+  formula = death ~ anterior + hcabg + kk2 + kk3 + kk4 + age2 + age3 + age4,
+  data = heart, family = binomialEF(link = "loglog")
+)
 ```
 
 AUC improved by changing the link.
@@ -62,9 +65,11 @@ AUC improved by changing the link.
 ``` r
 predictions <- heart %>%
   select(death) %>%
-  mutate(death = factor(death, levels = c("1", "0")),
-         logitProb = predict(object = glmLogit, newdata = heart, type = "response"),
-         loglogProb = predict(object = glmLoglog, newdata = heart, type = "response"))
+  mutate(
+    death = factor(death, levels = c("1", "0")),
+    logitProb = predict(object = glmLogit, newdata = heart, type = "response"),
+    loglogProb = predict(object = glmLoglog, newdata = heart, type = "response")
+  )
 
 roc_auc(data = predictions, truth = death, logitProb)
 #> # A tibble: 1 × 3

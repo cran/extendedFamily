@@ -32,7 +32,8 @@ data(heart)
 A dataset containing 4,483 rows about heart attack victims.
 }
 \details{
-The raw dataset is minimally modified in this package. Rows containing missing values were removed. The center
-variable was dropped. This data is referred to as "heart01" in Generalized Linear Models and Extensions book.
+The raw dataset is minimally modified in this package. Rows containing
+missing values were removed. The center variable was dropped. This data is
+referred to as "heart01" in Generalized Linear Models and Extensions book.
 }
 \keyword{datasets}

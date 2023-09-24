@@ -19,7 +19,8 @@
 #' @source Hardin, James William., and Joseph Hilbe. Generalized Linear Models and Extensions. Stata Press, 2012.
 #'
 #' Dataset can be downloaded at \url{https://www.stata-press.com/data/glmext.html}
-#' @details The raw dataset is minimally modified in this package. Rows containing missing values were removed. The center
-#' variable was dropped. This data is referred to as "heart01" in Generalized Linear Models and Extensions book.
+#' @details The raw dataset is minimally modified in this package. Rows containing
+#' missing values were removed. The center variable was dropped. This data is
+#' referred to as "heart01" in Generalized Linear Models and Extensions book.
 #' @usage data(heart)
 "heart"
