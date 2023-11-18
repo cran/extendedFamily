@@ -1,10 +1,10 @@
-573fbe06911cd9a4d4c76695fe080c07 *DESCRIPTION
+70a8c6dc4f0f713e8db29849520f37f3 *DESCRIPTION
 2b6f285d4bc0ab799a9fd9d3659e247e *NAMESPACE
-2d36cb3deaa91b718ce5c9c6e8fc04dd *NEWS
+41dcc1a280a2b4ad57afd10db948bd95 *NEWS
 390686327975c638b681360c052a3bd8 *R/binomialEF.R
 b88cb222da3a3e384dea7d8a263442c5 *R/heart.R
 ebfc5d9a9a69372b5d495b27e7a8c0a9 *R/save_heart_data.R
-df656f52beedacf432eed4f72dbeb468 *README.md
+316b95847b1caee8ff61a68183c87376 *README.md
 7a43ee86d486b02af7313059c0eeef0c *data/heart.rda
 8d5fb1297cf99c1ea53851fffc4daff2 *man/binomialEF.Rd
 39958830f18730f6edf9f256e282be33 *man/figures/README-graphExample-1.png
